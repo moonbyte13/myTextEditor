@@ -1,37 +1,42 @@
 const installButton = document.getElementById('buttonInstall');
+const navBtn = document.querySelector('.nav-btn');
 let deferredPrompt;
 
-const handleBeforeInstallPrompt = event => {
-  // Prevent Chrome from automatically showing the prompt
+const toggleNavBtn = () => {
+  if (navBtn.style.display === 'none') {
+    navBtn.style.display = 'block';
+    console.log('show');
+  } else {
+    navBtn.style.display = 'none';
+    console.log('hide');
+  }
+};
+
+const handleBeforeInstallPrompt = (event) => {
   event.preventDefault();
-  // Store the event object
   deferredPrompt = event;
-  // Show the install button
-  installButton.hidden = false;
+  if (deferredPrompt == appinstalled) {
+    toggleNavBtn();
+  }
 };
 
 const handleButtonInstallClick = async () => {
   if (!deferredPrompt) {
     return;
   }
-  // Show the installation prompt
   deferredPrompt.prompt();
-  // Wait for user's choice
   const choiceResult = await deferredPrompt.userChoice;
   console.log('User choice:', choiceResult);
-  // Reset the deferredPrompt and hide the install button
   deferredPrompt = null; 
-  installButton.hidden = true;
+  toggleNavBtn();
 };
 
-const handleAppInstalled = event => {
-  // Reset the deferredPrompt and hide the install button
+const handleAppInstalled = (event) => {
   deferredPrompt = null;
-  installButton.hidden = true;
+  toggleNavBtn();
   console.log('App installed:', event);
 };
 
-// Add event listeners
 window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 installButton.addEventListener('click', handleButtonInstallClick);
 window.addEventListener('appinstalled', handleAppInstalled);
