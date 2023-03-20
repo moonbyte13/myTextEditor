@@ -210,5 +210,10 @@ h1 {
   }
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
 
-::webpack
+.CodeMirror-scrollbar {
+  display: flex;
+}
