@@ -34,7 +34,7 @@ export const getDb = async () => {
     console.log('Trying to open the database...');
     const db = await openDB('jate', 1);
     console.log('Database is opened successfully:', db);
-    
+
     console.log('Trying to retrieve data from object store "jate"...');
     const tx = db.transaction('jate', 'readonly');
     const store = tx.objectStore('jate');
@@ -43,7 +43,10 @@ export const getDb = async () => {
     console.log('Data retrieved successfully:', data);
     return data;
   } catch (err) {
-    console.error('An error occurred while retrieving data from database:', err);
+    console.error(
+      'An error occurred while retrieving data from database:',
+      err
+    );
     return null;
   }
 };

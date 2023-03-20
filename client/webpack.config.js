@@ -11,7 +11,7 @@ module.exports = () => {
     mode: 'development',
     entry: {
       main: './src/js/index.js',
-      install: './src/js/install.js'
+      install: './src/js/install.js',
     },
     output: {
       filename: '[name].bundle.js',
@@ -33,7 +33,8 @@ module.exports = () => {
         inject: true,
         name: 'PWA Text Editor',
         short_name: 'Text Editor',
-        description: 'A full PWA text editor that allows you to save your work to the cloud.',
+        description:
+          'A full PWA text editor that allows you to save your work to the cloud.',
         background_color: '#01579b',
         theme_color: '#ffffff',
         start_url: './index.html',
@@ -44,9 +45,9 @@ module.exports = () => {
             src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('src', 'images'),
-          }
-        ]
-      })
+          },
+        ],
+      }),
     ],
 
     module: {
@@ -62,10 +63,13 @@ module.exports = () => {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
-              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
-            }
-          }
-        }
+              plugins: [
+                '@babel/plugin-proposal-object-rest-spread',
+                '@babel/transform-runtime',
+              ],
+            },
+          },
+        },
       ],
     },
   };
