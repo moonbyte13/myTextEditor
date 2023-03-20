@@ -22,6 +22,7 @@ export const putDb = async (content) => {
     const request = store.put({ content });
     const txDone = await tx.done;
     const result = await request;
+    // NOTE: The following line is returning undefined
     console.log('🚀 - data saved to the database', result);
     return result;
   } catch (error) {
