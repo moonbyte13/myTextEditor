@@ -22,7 +22,7 @@ export default class {
       tabSize: 2,
     });
 
-    this.editor.setSize(null, "100vh");
+    this.editor.setSize(null, "92vh");
 
     // When the editor is ready, set the value to whatever is stored in indexeddb.
     // Fall back to localStorage if nothing is stored in indexeddb, and if neither is available, set the value to header.
