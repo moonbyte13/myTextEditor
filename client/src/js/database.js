@@ -19,10 +19,11 @@ export const putDb = async (content) => {
     const db = await openDB('jate', 1);
     const tx = db.transaction('jate', 'readwrite');
     const store = tx.objectStore('jate');
-    const data = await store.put({ content });
-    await tx.done;
-    console.log('🚀 - data saved to the database', data);
-    return data;
+    const request = store.put({ content });
+    const txDone = await tx.done;
+    const result = await request;
+    console.log('🚀 - data saved to the database', result);
+    return result;
   } catch (error) {
     console.error(error);
   }
@@ -34,19 +35,17 @@ export const getDb = async () => {
     console.log('Trying to open the database...');
     const db = await openDB('jate', 1);
     console.log('Database is opened successfully:', db);
-
+    
     console.log('Trying to retrieve data from object store "jate"...');
     const tx = db.transaction('jate', 'readonly');
     const store = tx.objectStore('jate');
-    const data = await store.getAll();
+    const request = store.get(1);
     await tx.done;
-    console.log('Data retrieved successfully:', data);
-    return data;
+    const result = await request;
+    console.log('Data retrieved successfully:', result);
+    return result;
   } catch (err) {
-    console.error(
-      'An error occurred while retrieving data from database:',
-      err
-    );
+    console.error('An error occurred while retrieving data from database:', err);
     return null;
   }
 };
