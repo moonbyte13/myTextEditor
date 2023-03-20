@@ -1,45 +1,37 @@
-const butInstall = document.getElementById('buttonInstall');
+const installButton = document.getElementById('buttonInstall');
+let deferredPrompt;
 
-// Logic for installing the PWA
-// TODO: Add an event handler to the `beforeinstallprompt` event
-window.addEventListener('beforeinstallprompt', (event) => {
-  // store the event so it can be triggered later.
-  window.deferredPrompt = event;
-
+const handleBeforeInstallPrompt = event => {
+  // Prevent Chrome from automatically showing the prompt
+  event.preventDefault();
+  // Store the event object
+  deferredPrompt = event;
   // Show the install button
-  butInstall.hidden = false;
-});
+  installButton.hidden = false;
+};
 
-// TODO: Implement a click event handler on the `butInstall` element
-butInstall.addEventListener('click', async () => {
-  const promptEvent = window.deferredPrompt;
-
-  if (!promptEvent) {
-    // The deferred prompt isn't available.
+const handleButtonInstallClick = async () => {
+  if (!deferredPrompt) {
     return;
   }
+  // Show the installation prompt
+  deferredPrompt.prompt();
+  // Wait for user's choice
+  const choiceResult = await deferredPrompt.userChoice;
+  console.log('User choice:', choiceResult);
+  // Reset the deferredPrompt and hide the install button
+  deferredPrompt = null; 
+  installButton.hidden = true;
+};
 
-  // Show the install prompt.
-  promptEvent.prompt();
+const handleAppInstalled = event => {
+  // Reset the deferredPrompt and hide the install button
+  deferredPrompt = null;
+  installButton.hidden = true;
+  console.log('App installed:', event);
+};
 
-  // Wait for the user to respond to the prompt
-  const result = await promptEvent.userChoice;
-
-  // Reset the deferred prompt variable, since
-  // prompt() can only be called once.
-  window.deferredPrompt = null;
-
-  // Hide the install button.
-  butInstall.hidden = true;
-
-  // Log the result
-  console.log('👍', 'userChoice:', result);
-});
-
-// TODO: Add an handler for the `appinstalled` event
-window.addEventListener('appinstalled', (event) => {
-  // clear prompt from memory
-  window.deferredPrompt = null;
-  // hide the install button
-  butInstall.hidden = true;
-});
+// Add event listeners
+window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+installButton.addEventListener('click', handleButtonInstallClick);
+window.addEventListener('appinstalled', handleAppInstalled);

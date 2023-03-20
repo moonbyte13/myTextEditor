@@ -20,7 +20,7 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         template: './index.html',
-        title: 'PWA Text Editor',
+        title: 'MOTE Text Editor',
       }),
 
       new InjectManifest({
@@ -31,13 +31,13 @@ module.exports = () => {
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
-        name: 'PWA Text Editor',
-        short_name: 'Text Editor',
+        name: 'MOTE Text Editor',
+        short_name: 'MOTE Text Editor',
         description:
           'A full PWA text editor that allows you to save your work to the cloud.',
         background_color: '#01579b',
         theme_color: '#ffffff',
-        start_url: './index.html',
+        start_url: './',
         publicPath: './',
         icons: [
           {
