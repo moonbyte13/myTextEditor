@@ -6,7 +6,7 @@
 ## Description 📝
 
 ```md
-This was a fun project, just very time consuming.
+A full PWA text editor that allows you to save your work to the cloud.
 ```
 
 ## User Story 📘
