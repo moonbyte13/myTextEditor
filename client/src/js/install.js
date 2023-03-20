@@ -1,6 +1,6 @@
 const installButton = document.getElementById('buttonInstall');
 const navBtn = document.querySelector('.nav-btn');
-let deferredPrompt;
+let deferredPrompt
 
 const toggleNavBtn = () => {
   if (navBtn.style.display === 'none') {
@@ -15,9 +15,6 @@ const toggleNavBtn = () => {
 const handleBeforeInstallPrompt = (event) => {
   event.preventDefault();
   deferredPrompt = event;
-  if (deferredPrompt == appinstalled) {
-    toggleNavBtn();
-  }
 };
 
 const handleButtonInstallClick = async () => {
