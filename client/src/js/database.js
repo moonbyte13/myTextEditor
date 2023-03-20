@@ -41,7 +41,6 @@ export const getDb = async () => {
     const data = await store.getAll();
     await tx.done;
     console.log('Data retrieved successfully:', data);
-    
     return data;
   } catch (err) {
     console.error('An error occurred while retrieving data from database:', err);
